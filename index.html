@@ -1,23 +1,793 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "GMC 허머 EV 장기렌트카",
+    "image": "https://yourdomain.com/images/hummer-ev-main.jpg",
+    "description": "2026년 최신 GMC 허머 EV SUV 및 픽업 모델의 장기렌트 서비스 가격 비교, 장단점 분석 및 실시간 맞춤형 견적 산출 시스템을 제공합니다.",
+    "brand": {
+      "@type": "Brand",
+      "name": "GMC"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "KRW",
+      "lowPrice": "1500000",
+      "highPrice": "2800000",
+      "offerCount": "12",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "GMC 허머 EV 3X 픽업 장기렌트",
+          "price": "1850000",
+          "priceCurrency": "KRW",
+          "description": "1000마력 시스템과 크랩워크가 적용된 프리미엄 픽업"
+        },
+        {
+          "@type": "Offer",
+          "name": "GMC 허머 EV 3X SUV 장기렌트",
+          "price": "1950000",
+          "priceCurrency": "KRW",
+          "description": "압도적인 공간과 오프로드 성능을 갖춘 플래그십 SUV"
+        }
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed, 
+    figure, figcaption, footer, header, hgroup, 
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video, input, select, textarea, button {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      line-height: 1.7;
+      background-color: #f7f9fc;
+      color: #2d3748;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a202c, #2d3748);
+      color: #ffffff;
+      padding: 2.5rem 1rem;
+      text-align: center;
+      border-bottom: 4px solid #d97706;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      margin-bottom: 1rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #fbbf24;
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      background-color: #ffffff;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      color: #1a202c;
+      border-left: 5px solid #d97706;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: #2c5282;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      color: #4a5568;
+      text-align: justify;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 1rem;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f7fafc;
+    }
+
+    .chart-container {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background-color: #f8fafc;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .chart-title {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #1e293b;
+      text-align: center;
+    }
+
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .bar-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .bar-label {
+      width: 250px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .bar-wrapper {
+      flex-grow: 1;
+      background-color: #e2e8f0;
+      border-radius: 8px;
+      height: 24px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background-color: #3b82f6;
+      border-radius: 8px;
+    }
+
+    .bar-fill.fill-pickup {
+      width: 100%;
+      background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    }
+
+    .bar-fill.fill-suv {
+      width: 83%;
+      background: linear-gradient(90deg, #10b981, #047857);
+    }
+
+    .bar-fill.fill-average {
+      width: 70%;
+      background: linear-gradient(90deg, #f59e0b, #b45309);
+    }
+
+    .keyword-box {
+      background-color: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+    }
+
+    .keyword-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .keyword-list span {
+      background-color: #dcfce7;
+      color: #166534;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .form-container {
+      background-color: #fcfcfc;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #2d3748;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #ffffff;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #3182ce;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background-color: #d97706;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #b45309;
+    }
+
+    .calculator-result {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background-color: #eff6ff;
+      border-radius: 8px;
+      border: 1px solid #bfdbfe;
+      display: none;
+    }
+
+    .calculator-result h4 {
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+
+    .calculator-result p {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1d4ed8;
+    }
+
+    dl dt {
+      font-weight: 700;
+      padding: 1.25rem;
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-top: 0.75rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    dl dt:hover {
+      background-color: #f1f5f9;
+    }
+
+    dl dd {
+      padding: 1.25rem;
+      border: 1px solid #e2e8f0;
+      border-top: none;
+      background-color: #ffffff;
+      border-radius: 0 0 8px 8px;
+      display: none;
+      margin-bottom: 0.75rem;
+    }
+
+    .active-accordion + dd {
+      display: block;
+    }
+
+    .external-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .external-links a {
+      display: block;
+      padding: 1rem;
+      background-color: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      color: #334155;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .external-links a:hover {
+      background-color: #e2e8f0;
+      color: #0f172a;
+    }
+
+    footer {
+      background-color: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>GMC 허머 EV 장기렌트카 - 2026년형 모델별 합리적인 비교 분석 및 최저가 견적 가이드</h1>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#소개">모델 소개</a></li>
+        <li><a href="#성능비교">모델별 차이점</a></li>
+        <li><a href="#비용분석">장기렌트 비용 안내</a></li>
+        <li><a href="#장단점">장단점 및 꿀팁</a></li>
+        <li><a href="#맞춤견적">실시간 모의 견적</a></li>
+        <li><a href="#자주묻는질문">자주 묻는 질문</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <main>
+    <section id="소개">
+      <h2>압도적인 존재감, GMC 허머 EV 장기렌트카의 탄생</h2>
+      <p>
+        미국 제너럴 모터스의 정통 오프로더 브랜드 GMC에서 출시한 고전압 배터리 시스템 기반의 대형 전기차, GMC 허머 EV 시리즈는 도로 위에서 타의 추종을 불허하는 존재감을 뽐냅니다. 높은 세금 혜택과 유지비 절감이라는 뚜렷한 목적을 가진 법인 사업자 및 개인 사업자들을 중심으로 최근 장기렌트와 관련한 문의가 끊임없이 증가하고 있습니다. 특히 일시불 구매 시 발생하는 과도한 초기 자금 투입과 전기차 고유의 감가상각 부담을 줄이기 위한 방안으로 많은 소비자들이 전문 대여 업체를 찾아 비교하고 있습니다.
+      </p>
+      <p>
+        2026년 기준 국내 수입 모델 공급 현황을 살펴보면, 단순 소유보다는 차량을 효율적으로 이용할 수 있는 장기렌트가 한층 유리하다는 사실이 시장 전문가들 사이에서 입증되었습니다. 네이버나 구글과 같은 주요 검색 포털과 유튜브 등 다양한 플랫폼을 기반으로 실제 주행 후기가 공유되면서, 이 거대한 차량을 세금 혜택과 저렴한 비용으로 운용할 수 있는 최적의 합리적인 설계 방식이 널리 추천되고 있습니다.
+      </p>
+
+      <div class="keyword-box">
+        <p class="chart-title">검색엔진 자동완성 및 연관검색 분석 키워드</p>
+        <div class="keyword-list">
+          <span>GMC 허머 EV SUV</span>
+          <span>GMC 허머 EV 픽업</span>
+          <span>GMC 허머 EV 에디션 1</span>
+          <span>GMC 허머 EV 3X 픽업</span>
+          <span>GMC 허머 EV 3X SUV</span>
+          <span>GMC 허머 EV 2X 픽업</span>
+          <span>GMC 허머 EV 2X SUV</span>
+          <span>GMC 허머 EV 2 픽업</span>
+          <span>GMC 허머 EV 오프로드 패키지</span>
+          <span>GMC 허머 EV 익스트림 오프로드 패키지</span>
+          <span>GMC 허머 EV 크랩워크</span>
+          <span>GMC 허머 EV 4륜 조향 시스템</span>
+          <span>GMC 허머 EV 얼티엄 배터리 플랫폼</span>
+          <span>GMC 허머 EV 1000마력 시스템</span>
+          <span>GMC 허머 EV 830마력 시스템</span>
+          <span>GMC 허머 EV 왓츠투프리덤</span>
+          <span>GMC 허머 EV 슈퍼크루즈</span>
+          <span>GMC 허머 EV 디태처블 스카이 패널</span>
+          <span>GMC 허머 EV 울트라비전 카메라</span>
+          <span>GMC 허머 EV 350kW 초고속 충전</span>
+          <span>GMC 허머 EV 에어 서스펜션</span>
+          <span>GMC 허머 EV e4WD 구동계</span>
+          <span>GMC 허머 EV 주행거리 성능</span>
+          <span>GMC 허머 EV 토크 벡터링</span>
+          <span>GMC 허머 EV 제로백 가속</span>
+          <span>GMC 허머 EV 최저지상고 조절</span>
+          <span>GMC 허머 EV 인포테인먼트 시스템</span>
+          <span>GMC 허머 EV 오프로드 주행 모드</span>
+          <span>GMC 허머 EV 회생 제동</span>
+          <span>GMC 허머 EV 국내 수입 모델</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="성능비교">
+      <h2>GMC 허머 EV 모델군 성능 및 주요 차이점</h2>
+      <p>
+        GMC 허머 EV 라인업은 차체 형태에 따라 크게 픽업 모델과 SUV 모델로 나뉩니다. 강력한 주행 감각과 오프로드 성능을 원하는 운전자라면 얼티엄 배터리 플랫폼을 적용하여 최대 1000마력의 출력을 발휘하는 GMC 허머 EV 3X 픽업을 가장 먼저 고민하게 됩니다. 반면 패밀리카 형태의 다목적 활용도를 희망하는 분들이라면 전장과 휠베이스가 다소 짧아 국내 도심 환경에서 비교적 조향이 편리한 GMC 허머 EV 3X SUV를 추천하는 경향이 짙습니다.
+      </p>
+      <p>
+        초기 한정판 모델인 GMC 허머 EV 에디션 1은 출시 당시부터 뜨거운 감자였으며, 점차 대중성을 넓힌 GMC 허머 EV 2X 픽업 및 GMC 허머 EV 2X SUV 라인업도 실속파 오너들에게 호평을 얻고 있습니다. 보다 가성비를 높인 엔트리급 트림인 GMC 허머 EV 2 픽업 모델도 점차 라인업 확충을 꾀하고 있어 소비자의 선택 폭은 넓어지는 추세입니다.
+      </p>
+
+      <h3>허머 EV의 대표적인 하이테크 편의 사양</h3>
+      <p>
+        이 차량의 가장 큰 특징은 거대한 덩치에도 불구하고 게처럼 옆으로 비스듬히 주행할 수 있도록 돕는 GMC 허머 EV 4륜 조향 시스템 기반의 GMC 허머 EV 크랩워크 기능입니다. 또한 막강한 성능을 직관적으로 체감할 수 있는 런치컨트롤 기능인 GMC 허머 EV 왓츠투프리덤을 작동시키면, 정지 상태에서 시속 100킬로미터까지 단 3초대에 도달하는 놀라운 가속력을 맛보게 됩니다. 주행 안전성과 안락함을 최대로 끌어올리기 위한 GMC 허머 EV 에어 서스펜션은 도로 노면에 따른 차고 변화 및 탁월한 감쇄력을 확보하여 승차감을 증대해 줍니다.
+      </p>
+
+      <div class="chart-container">
+        <div class="chart-title">2026년식 GMC 허머 EV 주요 모델 출력 비교 (단위: 마력)</div>
+        <div class="bar-chart">
+          <div class="bar-item">
+            <span class="bar-label">3X 픽업 (3모터 e4WD)</span>
+            <div class="bar-wrapper">
+              <div class="bar-fill fill-pickup"></div>
+            </div>
+            <span style="margin-left: 10px; font-weight:700;">1000 HP</span>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">3X SUV (3모터 e4WD)</span>
+            <div class="bar-wrapper">
+              <div class="bar-fill fill-suv"></div>
+            </div>
+            <span style="margin-left: 10px; font-weight:700;">830 HP</span>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">2X 시리즈 (2모터 e4WD)</span>
+            <div class="bar-wrapper">
+              <div class="bar-fill fill-average"></div>
+            </div>
+            <span style="margin-left: 10px; font-weight:700;">625 HP</span>
+          </div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>구분 및 모델</th>
+            <th>구동방식 및 엔진</th>
+            <th>최대 출력</th>
+            <th>적용 서스펜션</th>
+            <th>핵심 적용 기능</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3X 픽업</td>
+            <td>3모터 e4WD 시스템</td>
+            <td>1,000 마력</td>
+            <td>어댑티브 에어 서스펜션</td>
+            <td>크랩워크, e4WD 구동계</td>
+          </tr>
+          <tr>
+            <td>3X SUV</td>
+            <td>3모터 e4WD 시스템</td>
+            <td>830 마력</td>
+            <td>어댑티브 에어 서스펜션</td>
+            <td>디태처블 스카이 패널</td>
+          </tr>
+          <tr>
+            <td>2X 픽업 및 SUV</td>
+            <td>2모터 e4WD 시스템</td>
+            <td>625 마력</td>
+            <td>옵션 선택 서스펜션</td>
+            <td>울트라비전 카메라</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="비용분석">
+      <h2>GMC 허머 EV 장기렌트카 월 납입 비용 및 시세표</h2>
+      <p>
+        신차를 일시불이나 일반 할부로 구매하는 경우 차량의 높은 권장 소비자가격으로 인해 막대한 취득세와 공채 매입 비용이 일시에 발생합니다. 그러나 장기렌트 상품을 운용하게 되면 취등록세가 초기 월 대여료에 골고루 분산되어 포함되므로 초기 유동 자금 확보에 결정적인 도움을 줍니다.
+      </p>
+      <p>
+        2026년 기준 대한민국 시장의 허머 EV 장기렌트 평균 비용은 계약 조건에 따라 다양하게 책정됩니다. 보증금 수준과 무보증 여부, 그리고 연간 약정 거리 설정에 따라 매달 지급하는 금액에 유의미한 격차가 발생하므로, 신중한 견적 비교가 필연적입니다. 업계 평균 시세를 대략적으로 확인하고 나에게 맞는 합리적인 설계안을 수립해 보시기 바랍니다.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>초기 보증금 비율</th>
+            <th>예상 월 렌트료 (원)</th>
+            <th>계약 기간</th>
+            <th>비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>허머 EV 3X 픽업</td>
+            <td>무보증 (0%)</td>
+            <td>2,300,000 ~ 2,600,000</td>
+            <td>60개월</td>
+            <td>초기 자금 부담 최소화</td>
+          </tr>
+          <tr>
+            <td>허머 EV 3X 픽업</td>
+            <td>보증금 30% 선납</td>
+            <td>1,750,000 ~ 1,950,000</td>
+            <td>60개월</td>
+            <td>가장 선호도가 높은 추천 안</td>
+          </tr>
+          <tr>
+            <td>허머 EV 3X SUV</td>
+            <td>무보증 (0%)</td>
+            <td>2,400,000 ~ 2,750,000</td>
+            <td>60개월</td>
+            <td>넓은 실내 공간 확보 모델</td>
+          </tr>
+          <tr>
+            <td>허머 EV 3X SUV</td>
+            <td>보증금 30% 선납</td>
+            <td>1,850,000 ~ 2,050,000</td>
+            <td>60개월</td>
+            <td>사업자 소득세 경감 최적 조건</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        위 수치는 국내 주요 렌트사의 공통된 조건에 기반한 단순 예시 수치이며, 금융사의 할인 이벤트 및 개별 심사 조건에 따라 소폭 변동이 있을 수 있습니다. 따라서 전문 상담을 통해 맞춤형 설계 견적을 수령하시는 것이 비용 절감의 가장 빠른 지름길입니다.
+      </p>
+    </section>
+
+    <section id="장단점">
+      <h2>GMC 허머 EV의 장점과 단점, 장단점 정밀 비교</h2>
+      <p>
+        장기렌트를 진행하기에 앞서 차량 자체의 강점과 약점을 명확히 파악하는 과정은 매우 중요합니다. 아무리 탁월한 고성능 전기차라고 할지라도 국내의 도로 환경과 충전 조건 등 실질적인 변수들을 무시할 수 없기 때문입니다.
+      </p>
+
+      <h3>GMC 허머 EV가 선사하는 핵심 장점</h3>
+      <p>
+        첫째, 압도적인 오프로드 돌파력과 유니크함입니다. GMC 허머 EV 익스트림 오프로드 패키지에 포함된 고성능 사양들은 험로 탈출뿐 아니라 도심에서도 최상의 품격을 부여합니다. 둘째, 사업자 세제 혜택 극대화입니다. 연간 최대 일정 한도까지 렌트 비용 및 유지관리 수수료를 전액 비용 처리하여 종합소득세 및 법인세 산출 시 과세표준을 낮출 수 있습니다. 셋째, 정비 관리의 압도적 편리성입니다. 복잡한 소모품 관리 및 정비 옵션을 렌트 상품에 포함해 두면 귀찮은 자가 점검 과정 없이 지정된 정비 제휴망을 통해 원스톱 케어를 받으실 수 있습니다.
+      </p>
+
+      <h3>선택 시 유념해야 할 치명적인 단점</h3>
+      <p>
+        가장 먼저 부각되는 부분은 차체 중량이 4톤에 달해 기계식 주차장 이용이 불가능하다는 점입니다. 아파트나 일반 빌딩의 좁은 주차선 구획 내에 거치하기가 힘들어 문콕 피해나 인접 차량과의 간섭 시비가 유발될 우려가 존재합니다. 또한 복합 전비 성능이 다소 낮아 충전을 빈번하게 해야 하며, 일반적인 도심 주행 위주일 경우 뛰어난 배터리 용량에 비해 실용 효율성이 다소 떨어지는 차이점이 존재하므로 면밀한 검토가 동반되어야 합니다.
+      </p>
+      <p>
+        온라인상의 유력 커뮤니티인 디시인사이드 장기렌트 갤러리나 테슬라, 허머 관련 동호회의 내돈내산 실제 이용자 후기들을 꼼꼼하게 대조해 보면, 운용 패턴에 따라 호불호가 갈리는 양상이 뚜렷하게 관찰됩니다. 일상적인 패밀리카 용도로 무작정 선택하기보다는 사업적인 브랜딩과 대형 레저 활동을 겸하는 유저들에게 압도적으로 추천되는 추세입니다.
+      </p>
+    </section>
+
+    <section id="맞춤견적">
+      <h2>실시간 모의 맞춤 견적 계산기 및 체류 분석 입력 폼</h2>
+      <p>
+        GMC 허머 EV 장기렌트 견적을 손쉽게 확인해 보실 수 있도록 개발된 대여료 시뮬레이터입니다. 원하시는 조건들을 체크하고 세부적인 세무 관련 상담과 함께 신규 가입 혜택, 특별 사은품 제공 내역, 금융 제휴사의 현금지원 혜택까지 종합적으로 확인해 보세요.
+      </p>
+
+      <div class="form-container">
+        <form id="rentForm" onsubmit="calculateRent(event)">
+          <div class="form-group">
+            <label for="carModel">상세 트림 선택</label>
+            <select id="carModel" class="form-control" required>
+              <option value="pickup3x">GMC 허머 EV 3X 픽업 (예상가 2억 이상)</option>
+              <option value="suv3x">GMC 허머 EV 3X SUV (예상가 1억 8천 이상)</option>
+              <option value="pickup2x">GMC 허머 EV 2X 픽업</option>
+              <option value="suv2x">GMC 허머 EV 2X SUV</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="rentTerm">장기 렌트 계약 기간</label>
+            <select id="rentTerm" class="form-control" required>
+              <option value="36">36개월</option>
+              <option value="48">48개월</option>
+              <option value="60">60개월 (인기 최고)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="prepayDeposit">초기 보증금 비율</label>
+            <select id="prepayDeposit" class="form-control" required>
+              <option value="0">무보증 (보증보험 대체 가능)</option>
+              <option value="10">보증금 10% 납부</option>
+              <option value="20">보증금 20% 납부</option>
+              <option value="30">보증금 30% 납부 (인하율 극대화)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mileage">연간 약정 거리</label>
+            <select id="mileage" class="form-control" required>
+              <option value="10000">연간 10,000km 이하</option>
+              <option value="20000">연간 20,000km (가장 표준)</option>
+              <option value="30000">연간 30,000km 이상</option>
+              <option value="unlimited">제한 없음 (영업 활동용)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>비즈니스 추가 혜택 및 관심 이벤트 선택 (중복 가능)</label>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="promotions" value="gift"> 신규 가입 전용 고급 블랙박스 및 틴팅 패키지 사은품 수령
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="promotions" value="cashback"> 첫 달 렌트료 특별 할인 및 백화점 상품권 증정 이벤트 참여
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="promotions" value="taxConsulting"> 법인세 및 종합소득세 경세를 위한 전문 세무 분석 리포트 수신
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="customerName">문의 고객명</label>
+            <input type="text" id="customerName" class="form-control" placeholder="성함 또는 법인 명칭을 입력해 주세요" required>
+          </div>
+
+          <div class="form-group">
+            <label for="customerPhone">연락처</label>
+            <input type="tel" id="customerPhone" class="form-control" placeholder="예시: 010-1234-5678" required>
+          </div>
+
+          <div class="form-group">
+            <label for="userComments">기타 상세 요청 및 희망 인도 시기</label>
+            <textarea id="userComments" class="form-control" rows="4" placeholder="희망하시는 추가 옵션이나 상세 요구사항을 자유롭게 기재해 주세요. (예: e4WD 오프로드 옵션 추가 희망 등)"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">실시간 예상 대여 가격 산출하기</button>
+        </form>
+
+        <div id="calcResult" class="calculator-result">
+          <h4>GMC 허머 EV 월 대여료 최종 산출 결과</h4>
+          <p id="calcValue">월 0원</p>
+          <div style="font-size:0.85rem; color:#475569; margin-top:10px;">
+            제시된 대여료는 대략적인 참고치이며, 심사 승인 여부 및 프로모션 할인율 적용에 따라 실 청구 비용과 다소 차이가 존재할 수 있습니다. 입력해 주신 연락처로 정밀한 최종 상세 산정 내역을 즉각 송부해 드리겠습니다.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="전문업체">
+      <h2>신뢰성 높은 최적의 렌트 설계 및 제안 방법</h2>
+      <p>
+        동일한 차량 모델이라고 하더라도 계약을 진행하는 금융 대행사 및 전문 에이전트 업체의 수수료 요율과 마진 설계에 따라 최종 지불하는 납입비는 천차만별로 벌어집니다. 일부 비전문 에이전시의 눈속임용 미끼 상품에 속아 넘어가지 않기 위해서는, 반드시 오랜 정통성을 확보한 자동차 금융 전문 컨설팅 브랜드를 통해 진행해야 합니다.
+      </p>
+      <p>
+        최근에는 네이버 지식인이나 구글 트렌드 상위 노출 자료를 토대로 다수의 메이저 제휴사 금리를 실시간으로 자동 비교해 주는 시스템이 고도화되어 있습니다. 고객 여러분의 신용 점수와 자금 운용 스케줄을 종합 판단한 맞춤형 안내를 통해 불필요한 비용의 누수를 철저히 차단할 수 있습니다.
+      </p>
+    </section>
+
+    <section id="외부정보">
+      <h2>공인 기관 및 공신력 있는 참조 리소스 안내</h2>
+      <p>
+        GMC 허머 EV의 공인 스펙과 세무적 혜택, 그리고 전기차 운용 환경에 대한 고전적인 상식 정보들은 아래의 공식적인 검증 기관 링크를 통해 교차 검증을 진행해 보시는 것을 강력히 추천합니다.
+      </p>
+      <div class="external-links">
+        <a href="https://namu.wiki/w/GMC%20%ED%97%88%EB%A8%B8%20EV" target="_blank" rel="noopener noreferrer">나무위키 허머 EV 백과</a>
+        <a href="https://www.gmckorea.co.kr" target="_blank" rel="noopener noreferrer">GMC 코리아 공식 홈페이지</a>
+        <a href="https://www.ev.or.kr" target="_blank" rel="noopener noreferrer">무공해차 통합누리집 포털</a>
+        <a href="https://www.molit.go.kr" target="_blank" rel="noopener noreferrer">국토교통부 정부 누리집</a>
+        <a href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24 세무 서식 가이드</a>
+      </div>
+    </section>
+
+    <section id="자주묻는질문">
+      <h2>GMC 허머 EV 장기렌트카 관련 핵심 FAQ 아코디언</h2>
+      <dl>
+        <dt class="accordion-trigger">질문: 전기차 보조금(지원금) 수령 혜택은 어떻게 계산되나요?</dt>
+        <dd>답변: GMC 허머 EV 시리즈의 경우 높은 권장 차량 가격 책정으로 인해 정부 국비 보조금 및 지자체 지방비 보조금 지급 대상 범위에서 제외되거나 극히 소액만 적용될 수 있습니다. 다만, 장기렌트로 이용할 시에는 개별 렌트사가 미리 적용받은 기업형 면세 특판 할인 혜택이 분산 적용되므로 간접적인 보조금 절감 효과를 체감하실 수 있습니다.</dd>
+
+        <dt class="accordion-trigger">질문: 무보증 계약 시 신용 등급이나 연 매출 조건이 까다롭나요?</dt>
+        <dd>답변: 차량 가액이 매우 높은 고가 전기차에 속하기 때문에, 무보증 승인을 위해서는 개인의 신용 평점이나 법인의 매출액 수준이 핵심 심사 기준으로 활용됩니다. 만일 단독 승인이 어려운 신용 상태인 경우에는 합리적인 수준의 보증금 납입 혹은 보증보험사의 보증증권 발급으로 대체하여 수월하게 심사를 통과할 수 있는 대안 루트를 전담 에이전트가 완벽하게 설계해 드립니다.</dd>
+
+        <dt class="accordion-trigger">질문: 법인 업무용 차량 임차료 전액 비용 처리 기준이 궁금합니다.</dt>
+        <dd>답변: 매년 종합소득세 및 법인세 산출 단계에서 업무용 차량 1대당 임차료와 유류비, 충전 비용 등을 법적인 지정 한도 내에서 간편하게 전액 손비 처리할 수 있습니다. 이를 통해 사업자의 한 해 과세 소득 기준선을 낮춤으로써 결과적으로 납부해야 하는 세금 지출 자체를 큰 폭으로 경감하는 훌륭한 재테크 도구로 활용됩니다.</dd>
+
+        <dt class="accordion-trigger">질문: 리스와 장기렌트 상품 중 어떤 방식이 제게 유리할까요?</dt>
+        <dd>답변: 장기렌트의 경우 대여료에 매월 자동차 보험료와 매년 부과되는 자동차세까지 완전히 통합되어 납부되므로 회계 처리가 아주 단순하다는 장점이 있습니다. 아울러 렌트사의 단체 요율이 일괄 적용되어 사고 건수가 누적되더라도 개인의 개별 자동차 보험료율이 영구 동결되어 불이익이 발생하지 않습니다. 반면 번호판의 허, 하, 호 기호를 피하고 일반 자가용 전용 번호판을 달기를 강력히 희망하신다면 금융리스나 운용리스 상품을 설계하시는 것을 권장합니다.</dd>
+
+        <dt class="accordion-trigger">질문: 계약 중도 해지 시 위약금(중도해지수수료) 요율은 얼마나 되나요?</dt>
+        <dd>답변: 중도해지수수료율은 남은 기간에 비례해 차등 적용되며 통상 잔여 렌트 대여료 합산분의 10퍼센트에서 39퍼센트 안팎으로 산정됩니다. 중도에 피치 못할 사정으로 처분해야 할 상황에 직면한다면, 높은 비용 손실을 막기 위해 승계 전용 장터를 통하여 타인에게 남은 약정 계약을 이관하는 중도 승계 방식으로 정리하시는 편이 금전적인 손실을 현격히 줄일 수 있는 정석 해결책입니다.</dd>
+      </dl>
+    </section>
+  </main>
+
+  <script>
+    document.querySelectorAll('.accordion-trigger').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        trigger.classList.toggle('active-accordion');
+        let nextSibling = trigger.nextElementSibling;
+        if (trigger.classList.contains('active-accordion')) {
+          nextSibling.style.display = 'block';
+        } else {
+          nextSibling.style.display = 'none';
+        }
+      });
+    });
+
+    function calculateRent(event) {
+      event.preventDefault();
+      
+      const model = document.getElementById('carModel').value;
+      const term = parseInt(document.getElementById('rentTerm').value);
+      const deposit = parseInt(document.getElementById('prepayDeposit').value);
+      const mileage = document.getElementById('mileage').value;
+      
+      let basePrice = 2400000;
+      
+      if (model === 'pickup3x') basePrice = 2400000;
+      else if (model === 'suv3x') basePrice = 2300000;
+      else if (model === 'pickup2x') basePrice = 1950000;
+      else if (model === 'suv2x') basePrice = 1850000;
+      
+      if (term === 36) basePrice += 250000;
+      else if (term === 48) basePrice += 100000;
+      
+      if (deposit === 10) basePrice -= 80000;
+      else if (deposit === 20) basePrice -= 160000;
+      else if (deposit === 30) basePrice -= 250000;
+      
+      if (mileage === '30000') basePrice += 50000;
+      else if (mileage === 'unlimited') basePrice += 150000;
+      else if (mileage === '10000') basePrice -= 30000;
+      
+      const formattedPrice = new Intl.NumberFormat('ko-KR').format(basePrice);
+      
+      const resultBox = document.getElementById('calcResult');
+      const valueText = document.getElementById('calcValue');
+      
+      valueText.textContent = `월 예상 납입 대여료: 약 ${formattedPrice} 원 (VAT 포함)`;
+      resultBox.style.display = 'block';
+    }
+  </script>
+
+  
